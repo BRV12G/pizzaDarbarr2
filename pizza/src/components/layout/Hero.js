@@ -4,7 +4,7 @@ import Right from '@/components/icons/right.js'
 
 export default function Hero() {
     return (
-      <section className="grid grid-cols-[0.4fr_0.6fr]">
+      <section className="hero">
         <div className='py-12 '>
            <h1 className="text-4xl font-semibold"> 
               Everything <br />  
