@@ -1,5 +1,5 @@
 import Image from 'next/image';
-
+import MenuItems from "@/components/menu/MenuItems";
 
 export default function HomeMenu () {
     return(
@@ -20,9 +20,17 @@ export default function HomeMenu () {
                         alt={'sallad'} />
                     </div>
                 </div>
-                <div className="text-center">
+                <div className="text-center mb-4">
                     <h3 className="text-gray-500 uppercase font-semibold leading-4">Check Out</h3>
                     <h2 className="text-primary font-bold text-4xl italic">Menu</h2>
+                </div>
+                <div className='grid grid-cols-3 gap-4'>
+                    <MenuItems />
+                    <MenuItems />
+                    <MenuItems />   
+                    <MenuItems />   
+                    <MenuItems />
+                    <MenuItems /> 
                 </div>
             </section>
        
