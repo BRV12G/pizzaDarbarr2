@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
-import {User} from "@/app/models/User"; // Ensure the correct path to your model
+// import {User} from "@/models/User"; 
+import {User} from "./../../../models/User";
+//  Ensure the correct path to your model
 
 
 export  async function POST(req) {
