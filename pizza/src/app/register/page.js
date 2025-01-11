@@ -9,6 +9,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 // import { set } from "mongoose";
+import {signIn} from "next-auth/react";
+
 export default function Registerpage() {
     const [email, setEmail]= useState('');
     const[password , setPassword]= useState('');
@@ -69,6 +71,7 @@ export default function Registerpage() {
                 </button>
                 <div className="text-center text-gray-500 my-4">or login with provider</div>
                 <button 
+                    type="button"
                     onClick={() => signIn('google', {callbackUrl: '/'})}
                     className="flex  justify-center gap-4" >
                     <Image src="/google-icon.png" alt="" width={24} height={24} />
