@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function Registerpage() {
     const [email, setEmail]= useState('');
     const[password , setPassword]= useState('');
-    function handleFormSubmit(ev) {
+     function handleFormSubmit(ev) {
         ev.preventDefault(); //prevents degault submit behaviour of html.When a form is submitted, the browser's default behavior is to reload the page.ev.preventDefault() stops this default behavior, so the form submission is handled entirely by JavaScript.
         // sending request to register route.
         fetch('/api/register',{ //endpoint where registration data is sent.
