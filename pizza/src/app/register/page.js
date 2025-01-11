@@ -8,24 +8,34 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { set } from "mongoose";
 export default function Registerpage() {
     const [email, setEmail]= useState('');
     const[password , setPassword]= useState('');
     const[creatingUser, setCreatingUser] = useState(false);
     const[userCreated, setUserCreated] = useState(false);
+    const[error, setError] = useState(false);
      async function handleFormSubmit(ev) {
         ev.preventDefault(); //prevents degault submit behaviour of html.When a form is submitted, the browser's default behavior is to reload the page.ev.preventDefault() stops this default behavior, so the form submission is handled entirely by JavaScript.
         // sending request to register route.
         setCreatingUser(true);
-        await fetch('/api/register',{ //endpoint where registration data is sent.
-            method: 'POST', //http method for the request.
-            body: JSON.stringify({email, password}), // Converting form data into a JSON string.
-            headers: {
-                'Content-Type': 'application/json' // Telling the server that the request body contains JSON data.
+        setError(false);
+        setUserCreated(false);
+          const response =  await fetch('/api/register',{ //endpoint where registration data is sent.
+                method: 'POST', //http method for the request.
+                body: JSON.stringify({email, password}), // Converting form data into a JSON string.
+                headers: {
+                    'Content-Type': 'application/json' // Telling the server that the request body contains JSON data.
+                }
+            });
+            if (response.ok) {
+                setUserCreated(true);
             }
-        });
-        setCreatingUser(false);
-        setUserCreated(true);
+            else {
+                setError(true);
+            }
+            // console.log(response);
+            setCreatingUser(false);        
     }
     return (
         <section className="mt-8">
@@ -33,6 +43,10 @@ export default function Registerpage() {
             {userCreated && (
                 <div className="my-4 text-center">User created.<br></br> Now you can {' '}
                 <Link className="underline" href="/login">Login &raquo; </Link></div>
+            )}
+             {error && (
+                <div className="my-4 text-center">An Error has occured .<br /> Please try again later</div>
+                
             )}
             <form className="block max-w-xs mx-auto" onSubmit={handleFormSubmit}>
                 {/* styling of these form is done in global.css file beacause all need same kind of styling */}
@@ -54,6 +68,9 @@ export default function Registerpage() {
                     <Image src="/google-icon.png" alt="" width={24} height={24} />
                     Login with Google
                 </button>
+                <div className="text-center text-gray-500 my-4 border-t pt-4">
+                    Existing account? <Link className="underline" href="/login">Login here &raquo;</Link>
+                </div>
             </form>
         </section>
     );
