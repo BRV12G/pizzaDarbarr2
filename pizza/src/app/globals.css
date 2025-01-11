@@ -15,6 +15,12 @@ input[type="text"] {
     @apply  border border-gray-300  px-4 py-2 bg-gray-100;
 }
 
+input[type="password"]:disabled,
+input[type="email"]:disabled,
+input[type="text"]:disabled {
+    @apply bg-gray-300 cursor-not-allowed;
+}
+
 /* block: Ensures each input field is displayed as a block element, taking up the full width of its container.*/
 
 button{
@@ -24,4 +30,8 @@ button{
 
 button[type="submit"], .submit{
     @apply border-0 bg-primary text-white;
+}
+
+button[type="submit"]:disabled, .submit:disabled{
+    @apply cursor-not-allowed bg-red-400;
 }

@@ -5,39 +5,50 @@
 
 
 
-
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 export default function Registerpage() {
     const [email, setEmail]= useState('');
     const[password , setPassword]= useState('');
-     function handleFormSubmit(ev) {
+    const[creatingUser, setCreatingUser] = useState(false);
+    const[userCreated, setUserCreated] = useState(false);
+     async function handleFormSubmit(ev) {
         ev.preventDefault(); //prevents degault submit behaviour of html.When a form is submitted, the browser's default behavior is to reload the page.ev.preventDefault() stops this default behavior, so the form submission is handled entirely by JavaScript.
         // sending request to register route.
-        fetch('/api/register',{ //endpoint where registration data is sent.
+        setCreatingUser(true);
+        await fetch('/api/register',{ //endpoint where registration data is sent.
             method: 'POST', //http method for the request.
             body: JSON.stringify({email, password}), // Converting form data into a JSON string.
             headers: {
                 'Content-Type': 'application/json' // Telling the server that the request body contains JSON data.
             }
         });
+        setCreatingUser(false);
+        setUserCreated(true);
     }
     return (
         <section className="mt-8">
             <h1 className="text-4xl text-center text-primary mb-4">Register</h1>
+            {userCreated && (
+                <div className="my-4 text-center">User created.<br></br> Now you can {' '}
+                <Link className="underline" href="/login">Login &raquo; </Link></div>
+            )}
             <form className="block max-w-xs mx-auto" onSubmit={handleFormSubmit}>
                 {/* styling of these form is done in global.css file beacause all need same kind of styling */}
                 <input 
                      type="email" placeholder="email id" 
                      value={email}
+                     disabled={creatingUser}
                      onChange={ev => setEmail(ev.target.value)}
                 />
                 <input 
                      type="password" placeholder="password"
                      value={password}
+                     disabled={creatingUser}
                      onChange={ev => setPassword(ev.target.value)}
                 />
-                <button type="submit"> Register </button>
+                <button type="submit" disabled={creatingUser} > Register </button>
                 <div className="text-center text-gray-500 my-4">or login with provider</div>
                 <button className="flex  justify-center gap-4">
                     <Image src="/google-icon.png" alt="" width={24} height={24} />
