@@ -8,7 +8,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { set } from "mongoose";
+// import { set } from "mongoose";
 export default function Registerpage() {
     const [email, setEmail]= useState('');
     const[password , setPassword]= useState('');
