@@ -62,9 +62,15 @@ export default function Registerpage() {
                      disabled={creatingUser}
                      onChange={ev => setPassword(ev.target.value)}
                 />
-                <button type="submit" disabled={creatingUser} > Register </button>
+                <button 
+                     type="submit" 
+                     disabled={creatingUser} 
+                     > Register 
+                </button>
                 <div className="text-center text-gray-500 my-4">or login with provider</div>
-                <button className="flex  justify-center gap-4">
+                <button 
+                    onClick={() => signIn('google', {callbackUrl: '/'})}
+                    className="flex  justify-center gap-4" >
                     <Image src="/google-icon.png" alt="" width={24} height={24} />
                     Login with Google
                 </button>
