@@ -2,7 +2,9 @@
 import { useSession } from 'next-auth/react';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState, useEffect } from "react";
+import AdminTabs from '@/components/layout/AdminTabs';
 export default function Profilepage() {
     const session = useSession();
     const {status} = session;
@@ -16,6 +18,7 @@ export default function Profilepage() {
     const [postalCode , setPostalCode] = useState('');
     const [city , setCity] = useState('');
     const [country , setCountry] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
 
 
 
@@ -31,6 +34,7 @@ export default function Profilepage() {
                     setPostalCode(data.postalCode);
                     setCity(data.city);
                     setCountry(data.country);
+                    setIsAdmin(data.admin);
                 })
             });
         }
@@ -78,8 +82,8 @@ export default function Profilepage() {
     const userImage = session.data.user.image;
     return (
         <section className="mt-8">
-            <h1 className="text-4xl text-center text-primary mb-4">Profile</h1>
-            <div className='max-w-md mx-auto'>
+            <AdminTabs isAdmin={isAdmin} />
+            <div className='max-w-md mx-auto mt-8'>
             {saved && (
                 <h2 className='text-center bg-green-100 rounded-lg border border-green-300 p-4'>
                     Profile Saved!

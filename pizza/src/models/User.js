@@ -12,6 +12,7 @@ const UserSchema = new Schema({
     postalCode: {type: String},
     city: {type: String},
     country: {type: String},
+    admin: {type: Boolean, default: false},
 }, {timestamps: true});  
 
 // UserSchema.post('validate', function (user) {
