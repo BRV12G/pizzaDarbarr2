@@ -10,15 +10,16 @@ export default function Profilepage() {
     const {status} = session;
     console.log(session);
 
-    const [userName , setUsername] = useState('');
+    const [userName , setUsername] = useState(' ');
     const [saved, setSaved] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
-    const [phone , setPhone] = useState('');
-    const [streetAddress , setStreetAddress] = useState('');
-    const [postalCode , setPostalCode] = useState('');
-    const [city , setCity] = useState('');
-    const [country , setCountry] = useState('');
+    const [phone , setPhone] = useState(' ');
+    const [streetAddress , setStreetAddress] = useState(' ');
+    const [postalCode , setPostalCode] = useState(' ');
+    const [city , setCity] = useState(' ');
+    const [country , setCountry] = useState(' ');
     const [isAdmin, setIsAdmin] = useState(false);
+    const [profileFetched, setProfileFetched] = useState(false);
 
 
 
@@ -35,6 +36,7 @@ export default function Profilepage() {
                     setCity(data.city);
                     setCountry(data.country);
                     setIsAdmin(data.admin);
+                    setProfileFetched(true);
                 })
             });
         }
@@ -71,7 +73,7 @@ export default function Profilepage() {
    
 
 
-    if (status === 'loading'){
+    if (status === 'loading'|| !profileFetched){
         return 'loading...';
     }
 

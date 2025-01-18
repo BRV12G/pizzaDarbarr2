@@ -2,37 +2,31 @@ import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 import {User} from "@/models/User";
+import { UserInfo } from "@/models/UserInfo";
 export async function PUT (req) {
     mongoose.connect(process.env.MONGO_URL);
     const data = await req.json();
+    const {name, ...otherUserInfo} = data;
     const session = await getServerSession(authOptions);
     const email = session.user.email;
     console.log({session, data});
 
-    // const user = await User.findOne({email});
-
-    // if('name' in data) {
-    //     //update user name
-    //     await User.updateOne({email},{name: data.name});
-    //     // const user = await User.findOne({email});
-    //     // user.name = data.name;
-    //     // await user.save();
-    //     // console.log({email,data});
-
-    // }
-    // if('city' in data) {
-
-    // }
     
-    await User.updateOne({email}, data);
+    await User.updateOne({email}, {name});
+    await UserInfo.findOneAndUpdate({email}, otherUserInfo, {upsert: true});
     return Response.json(session);
 }
 
 export async function GET (req) {
     mongoose.connect(process.env.MONGO_URL);
     const session = await getServerSession(authOptions);
-    const email = session.user.email;
+    const email = session?.user?.email;
+    if(!email) {
+        return Response.json({});
+    }
+    const user = await User.findOne({email}).lean();
+    const userInfo = await UserInfo.findOne({email}).lean();
     return Response.json(
-        await User.findOne({email})
+        {...user, ...userInfo}
     );
 }
