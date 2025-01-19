@@ -11,7 +11,8 @@ section.hero {
 input[type="password"],
 input[type="email"],
 input[type="text"],
-input[type="tel"] {
+input[type="tel"],
+input[type="number"] {
     @apply block rounded-xl mb-2 w-full;
     @apply  border border-gray-300  px-4 py-2 bg-gray-100;
 }
