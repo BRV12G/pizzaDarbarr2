@@ -91,6 +91,23 @@ export default function MenuItemsPage() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [basePrice, setBasePrice] = useState("");
+  const [imagePreview, setImagePreview] = useState(null); // Stores the preview URL
+
+
+
+  const handleImageChange = (ev) => {
+    const file = ev.target.files[0];
+    if (file) {
+      setImage(file);
+
+      // Generate a preview URL using FileReader
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   async function handleFormSubmit(ev) {
     ev.preventDefault();
@@ -127,9 +144,9 @@ export default function MenuItemsPage() {
 
     // Reset the form after successful submission
     setImage(null);
-    setName("");
-    setDescription("");
-    setBasePrice("");
+    // setName("");
+    // setDescription("");
+    // setBasePrice("");
   }
 
   if (loading) {
@@ -144,45 +161,34 @@ export default function MenuItemsPage() {
     <section className="mt-8">
       <AdminTabs isAdmin={true} />
       <form onSubmit={handleFormSubmit} className="mt-8 max-w-md mx-auto">
-        <div className="flex flex-col gap-4 items-start">
-          <div>
-            <label>Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(ev) => setImage(ev.target.files[0])}
-            />
-          </div>
-          <div className="grow">
-            <label>Item Name</label>
-            <input
-              type="text"
-              placeholder="Menu Item Name"
-              value={name}
-              onChange={(ev) => setName(ev.target.value)}
-            />
-            <label>Description</label>
-            <textarea
-              placeholder="Menu Item Description"
-              value={description}
-              onChange={(ev) => setDescription(ev.target.value)}
-            />
-            <label>Base Price</label>
-            <input
-              type="number"
-              placeholder="Base Price"
-              value={basePrice}
-              onChange={(ev) => setBasePrice(ev.target.value)}
-            />
-            <button type="submit" className="btn-primary mt-4">
-              Save
-            </button>
-          </div>
+        <div className="flex gap-4 items-start ">
+           <div className="flex flex-col gap-4">
+                <input id="fileInput" type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+               <div className="w-32 h-32 mt-4 border rounded-lg flex items-center justify-center ">
+                {imagePreview ? (
+                    <img  src={imagePreview} alt="Selected Preview" className="w-32 h-32 mt-4 object-cover rounded-lg border" />
+                ) : (
+                    <p className="text-sm text-gray-500">No image selected</p>
+                )}
+               </div>
+                <button  type="button" onClick={() => document.getElementById("fileInput").click()} className="btn-secondary"> {image ? "Edit Image" : "Upload Image"} </button>
+            </div>
+            <div className="grow">
+               <label>Item Name</label>
+                <input type="text" placeholder="Menu Item Name" value={name} onChange={(ev) => setName(ev.target.value)} />
+                <label>Description</label>
+                <input type="text" placeholder="Menu Item Description"value={description} onChange={(ev) => setDescription(ev.target.value)} />
+                <label>Base Price</label>
+                <input type="number" placeholder="Base Price" value={basePrice} onChange={(ev) => setBasePrice(ev.target.value)} />
+                <button type="submit" className="btn-primary mt-4">Save</button>
+            </div>
         </div>
       </form>
     </section>
   );
 }
+
+
 
 
 
