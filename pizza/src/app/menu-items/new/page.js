@@ -1,10 +1,14 @@
 "use client";
 
 import AdminTabs from "@/components/layout/AdminTabs";
-// import { useProfile } from "@/components/useProfile";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useProfile } from "@/components/useProfile";
+import Link from "next/link";
+import Left from "@/components/icons/left";
+import { redirect } from 'next/navigation';
+
+
 
 export default function NewMenuItemPage() {
 
@@ -13,7 +17,9 @@ export default function NewMenuItemPage() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [basePrice, setBasePrice] = useState("");
+    const [redirectToItems , setRedirectToItems] = useState(false);
     const [imagePreview, setImagePreview] = useState(null); // Stores the preview URL 
+
 
      
 
@@ -63,19 +69,24 @@ export default function NewMenuItemPage() {
           success: "Menu Item Saved Successfully!",
           error: "Error Saving Menu Item",
         });
-    
+        setRedirectToItems(true);
+
         // Reset the form after successful submission
         setImage(null);
         // setName("");
         // setDescription("");
         // setBasePrice("");
+
       }
+
+        if (redirectToItems) {
+          return redirect ('/menu-items');
+        }
     
+       
 
-
-
-
-
+    
+    
       if(loading){
         return 'Loading Menu info...';
       }
@@ -84,9 +95,12 @@ export default function NewMenuItemPage() {
         return 'You are not an admin!';
       }
 
-      return (
+    return (
     <section className="mt-8">
       <AdminTabs isAdmin={true} />
+      <div className="max-w-md mx-auto mt-8">
+        <Link href={'/menu-items'} className="button"> <Left /> <span>Show All Menu Items </span></Link>
+      </div>
       <form onSubmit={handleFormSubmit} className="mt-8 max-w-md mx-auto">
         <div className="flex gap-4 items-start ">
            <div className="flex flex-col gap-4">
@@ -112,6 +126,5 @@ export default function NewMenuItemPage() {
         </div>
       </form>
     </section>
-
-      );
+ );
 }
