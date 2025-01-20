@@ -56,6 +56,45 @@ export const POST = async (req) => {
 };
 
 
+// export async function PUT(req) {
+//   mongoose.connect(process.env.MONGO_URL);
+//   const { _id, ...data} = await req.json();
+//   await MenuItem.findByIdAndUpdate(_id, data);
+//   return Response.json(true);
+// }
+
+
+export const PUT = async (req) => {
+  await mongoose.connect(process.env.MONGO_URL);
+
+  const formData = await req.formData();
+  const _id = formData.get("_id"); // Extract item ID
+  const name = formData.get("name");
+  const description = formData.get("description");
+  const basePrice = parseFloat(formData.get("basePrice"));
+  const image = formData.get("image"); // Extract image
+
+  const updateData = { name, description, basePrice };
+
+  if (image) {
+    const imageBuffer = Buffer.from(await image.arrayBuffer());
+    updateData.image = imageBuffer; // Add the image if provided
+  }
+
+  try {
+    await MenuItem.findByIdAndUpdate(_id, updateData);
+    return NextResponse.json(true);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "Error updating menu item", error: error.message },
+      { status: 500 }
+    );
+  }
+};
+
+
+
 export async function GET() {
   mongoose.connect(process.env.MONGO_URL);
   return Response.json(
