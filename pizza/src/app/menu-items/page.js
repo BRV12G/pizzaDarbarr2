@@ -81,12 +81,24 @@
 "use client";
 
 import { useProfile } from "@/components/useProfile";
+import AdminTabs from "@/components/layout/AdminTabs";
+import Link from "next/link";
+import Right from "@/components/icons/right";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function MenuItemsPage() {
   
-
-
   const { loading, data } = useProfile();
+  const [menuItems, setMenuItems] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/menu-items").then(res => {
+        res.json().then(menuItems => {
+            setMenuItems(menuItems);
+        });
+    })
+  }, []);
   
   if (loading) {
     return "Loading Admin Info...";
@@ -97,7 +109,30 @@ export default function MenuItemsPage() {
   }
 
   return (
-    <div>menu</div>
+    <section className="mt-8 max-w-md mx-auto">
+      <AdminTabs isAdmin={true} />
+       <div className="mt-8">
+           <Link className="button" href={"/menu-items/new"}>
+               <span>Create New Menu Item </span> <Right />
+            </Link>
+        </div>
+        <div>
+            <h2 className="text-sm text-gray-500 mt-8">Edit Menu Items</h2>
+            <div className="grid grid-cols-3 gap-2">
+            {menuItems?.length > 0 && menuItems.map(item => (
+                <Link key={item._id} href={'/menu-items/edit/'+item._id} className = "bg-gray-200 rounded-lg p-4">
+                    <div className="relative">
+                        <Image src={`data:image/png;base64,${item.image}`} alt={''} c width={200} height={200} className="rounded-lg"/>
+                    </div>
+                    <div className="text-center">{item.name}</div>
+                </Link>
+            ))}
+
+            </div>
+            
+        </div>
+
+    </section>
   );
 }
 
