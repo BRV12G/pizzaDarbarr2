@@ -95,7 +95,7 @@ export default function CategoriesPage() {
                         setEditedCategory(c);
                         setCategoryName(c.name);
                     }}
-                    className="bg-gray-200 rounded-xl p-2 px-4 flex gap-2 mb-1 cursor-pointer">
+                    className=" rounded-xl p-2 px-4 flex gap-2 mb-1 cursor-pointer">
                     <span>{c.name}</span>
                 </button>
                ))}
