@@ -7,6 +7,7 @@ import { useProfile } from "@/components/useProfile";
 import Link from "next/link";
 import Left from "@/components/icons/left";
 import { redirect } from 'next/navigation';
+import MenuItemPriceProps from "@/components/layout/menuItemPriceProps";
 
 
 
@@ -19,6 +20,8 @@ export default function NewMenuItemPage() {
     const [basePrice, setBasePrice] = useState("");
     const [redirectToItems , setRedirectToItems] = useState(false);
     const [imagePreview, setImagePreview] = useState(null); // Stores the preview URL 
+    const [sizes, setSizes] = useState([]);
+    const [extraIngredientPrices, setExtraIngredientPrices] = useState([]);
 
 
      
@@ -45,6 +48,10 @@ export default function NewMenuItemPage() {
         formData.append("name", name);
         formData.append("description", description);
         formData.append("basePrice", basePrice);
+        // formData.append("sizes" , sizes);
+        // formData.append('extraIngredientPrices', extraIngredientPrices);
+        formData.append("sizes", JSON.stringify(sizes));
+        formData.append("extraIngredientPrices", JSON.stringify(extraIngredientPrices));
     
         const savingPromise = new Promise(async (resolve, reject) => {
           try {
@@ -95,6 +102,7 @@ export default function NewMenuItemPage() {
         return 'You are not an admin!';
       }
 
+    
     return (
     <section className="mt-8">
       <AdminTabs isAdmin={true} />
@@ -121,7 +129,12 @@ export default function NewMenuItemPage() {
                 <input type="text" placeholder="Menu Item Description"value={description} onChange={(ev) => setDescription(ev.target.value)} />
                 <label>Base Price</label>
                 <input type="number" placeholder="Base Price" value={basePrice} onChange={(ev) => setBasePrice(ev.target.value)} />
-                <button type="submit" className="btn-primary mt-4">Save</button>
+                                <MenuItemPriceProps name ={'Sizes'} addLabel={'Add Item Size'} props={sizes} setProps={setSizes} />
+                                <MenuItemPriceProps name ={'Extra Ingredient Prices'} addLabel={'Add Ingredient Prices'} props={extraIngredientPrices} setProps={setExtraIngredientPrices} />
+
+                
+                <button type="submit" className="btn-primary mt-4 mb-2">Save</button>
+
             </div>
         </div>
       </form>

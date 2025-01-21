@@ -8,6 +8,9 @@ import Link from "next/link";
 import Left from "@/components/icons/left";
 import { redirect } from 'next/navigation';
 import { useParams } from "next/navigation";
+import MenuItemPriceProps from "@/components/layout/menuItemPriceProps";
+
+
 
 export default function EditMenuItemPage() {
 
@@ -18,7 +21,11 @@ export default function EditMenuItemPage() {
     const [description, setDescription] = useState("");
     const [basePrice, setBasePrice] = useState("");
     const [redirectToItems , setRedirectToItems] = useState(false);
-    const [imagePreview, setImagePreview] = useState(null); // Stores the preview URL 
+    const [imagePreview, setImagePreview] = useState(null); // Stores the preview URL
+    const [sizes, setSizes] = useState([]);
+    const [extraIngredientPrices, setExtraIngredientPrices] = useState([]);
+
+ 
 
      useEffect(() => {
       fetch('/api/menu-items').then (res => {
@@ -32,6 +39,8 @@ export default function EditMenuItemPage() {
          const base64Image = `data:image/${imageType};base64,${item.image}`;
          setImagePreview(base64Image);
         //  setImagePreview(item.image); //
+        setSizes(item.sizes);
+        setExtraIngredientPrices(item.extraIngredientPrices)
         });
       })
 
@@ -71,6 +80,11 @@ export default function EditMenuItemPage() {
         formData.append("name", name);
         formData.append("description", description);
         formData.append("basePrice", basePrice);
+        // formData.append("sizes" , sizes);
+        // formData.append('extraIngredientPrices', extraIngredientPrices);
+        formData.append("sizes", JSON.stringify(sizes));
+        formData.append("extraIngredientPrices", JSON.stringify(extraIngredientPrices));
+    
     
         const savingPromise = new Promise(async (resolve, reject) => {
           try {
@@ -122,6 +136,8 @@ export default function EditMenuItemPage() {
         return 'You are not an admin!';
       }
 
+
+      
     return (
     <section className="mt-8">
       <AdminTabs isAdmin={true} />
@@ -148,6 +164,11 @@ export default function EditMenuItemPage() {
                 <input type="text" placeholder="Menu Item Description"value={description} onChange={(ev) => setDescription(ev.target.value)} />
                 <label>Base Price</label>
                 <input type="number" placeholder="Base Price" value={basePrice} onChange={(ev) => setBasePrice(ev.target.value)} />
+                
+                <MenuItemPriceProps name ="Sizes" addLabel="Add Item Size" props={sizes} setProps={setSizes} />
+                <MenuItemPriceProps name ={'Extra IngredientPrices'} addLabel={'Add Ingredient Prices'} props={extraIngredientPrices} setProps={setExtraIngredientPrices} />
+                
+
                 <button type="submit" className="btn-primary mt-4">Save</button>
             </div>
         </div>
