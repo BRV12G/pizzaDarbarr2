@@ -166,7 +166,7 @@ export default function EditMenuItemPage() {
                 <input type="number" placeholder="Base Price" value={basePrice} onChange={(ev) => setBasePrice(ev.target.value)} />
                 
                 <MenuItemPriceProps name ="Sizes" addLabel="Add Item Size" props={sizes} setProps={setSizes} />
-                <MenuItemPriceProps name ={'Extra IngredientPrices'} addLabel={'Add Ingredient Prices'} props={extraIngredientPrices} setProps={setExtraIngredientPrices} />
+                <MenuItemPriceProps name ={'Extra Ingredient Prices'} addLabel={'Add Ingredient Prices'} props={extraIngredientPrices} setProps={setExtraIngredientPrices} />
                 
 
                 <button type="submit" className="btn-primary mt-4">Save</button>
