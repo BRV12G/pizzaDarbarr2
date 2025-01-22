@@ -9,6 +9,7 @@ import Left from "@/components/icons/left";
 import { redirect } from 'next/navigation';
 import { useParams } from "next/navigation";
 import MenuItemPriceProps from "@/components/layout/menuItemPriceProps";
+import DeleteButton from "@/components/DeleteButton";
 
 
 
@@ -24,7 +25,8 @@ export default function EditMenuItemPage() {
     const [imagePreview, setImagePreview] = useState(null); // Stores the preview URL
     const [sizes, setSizes] = useState([]);
     const [extraIngredientPrices, setExtraIngredientPrices] = useState([]);
-
+    const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState('');
  
 
      useEffect(() => {
@@ -34,6 +36,7 @@ export default function EditMenuItemPage() {
          setName(item.name);
          setDescription(item.description);
          setBasePrice(item.basePrice);
+         setCategory(item.category);
          setImage(item.image);
          const imageType = item.imageType || "jpeg"; // Replace this with how you determine the type
          const base64Image = `data:image/${imageType};base64,${item.image}`;
@@ -79,6 +82,7 @@ export default function EditMenuItemPage() {
         formData.append("image", image);
         formData.append("name", name);
         formData.append("description", description);
+        formData.append("category", JSON.stringify(category));
         formData.append("basePrice", basePrice);
         // formData.append("sizes" , sizes);
         // formData.append('extraIngredientPrices', extraIngredientPrices);
@@ -119,6 +123,15 @@ export default function EditMenuItemPage() {
         // setBasePrice("");
 
       }
+
+
+      useEffect(() => {
+        fetch('/api/categories').then(res => {
+          res.json().then(categories => {
+            setCategories(categories);
+          });
+        });
+      }, []);
 
         if (redirectToItems) {
           return redirect ('/menu-items');
@@ -180,6 +193,12 @@ export default function EditMenuItemPage() {
                 <input type="text" placeholder="Menu Item Name" value={name} onChange={(ev) => setName(ev.target.value)} />
                 <label>Description</label>
                 <input type="text" placeholder="Menu Item Description"value={description} onChange={(ev) => setDescription(ev.target.value)} />
+                <label>Category</label>
+                <select value={category} onChange={ev => setCategory(ev.target.value)}>
+                  {categories?.length > 0 && categories.map(c => (
+                    <option value={c._id}>{c.name}</option>
+                  ))}
+                </select>
                 <label>Base Price</label>
                 <input type="number" placeholder="Base Price" value={basePrice} onChange={(ev) => setBasePrice(ev.target.value)} />
                 
@@ -193,9 +212,7 @@ export default function EditMenuItemPage() {
       </form>
       <div className="max-w-md mx-auto mt-4">
         <div className="max-w-xs ml-auto pl-4">
-          <button onClick={handleDeleteClick}>
-            Delete Menu Item
-          </button>
+          <DeleteButton label="Delete this Menu Item" onDelete={handleDeleteClick} />
         </div>
       </div>
     </section>
