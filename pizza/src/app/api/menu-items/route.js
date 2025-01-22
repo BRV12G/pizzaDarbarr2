@@ -152,6 +152,7 @@ export const POST = async (req) => {
     const image = formData.get("image");
     const name = formData.get("name");
     const description = formData.get("description");
+    const category = JSON.parse(formData.get("category"));
     const basePrice = parseFloat(formData.get("basePrice"));
     const sizes = JSON.parse(formData.get("sizes"));
     const extraIngredientPrices = JSON.parse(formData.get("extraIngredientPrices"));
@@ -173,6 +174,7 @@ export const POST = async (req) => {
       image: imageBuffer,
       name,
       description,
+      category,
       basePrice,
       sizes,
       extraIngredientPrices,
@@ -196,12 +198,13 @@ export const PUT = async (req) => {
     const _id = formData.get("_id");
     const name = formData.get("name");
     const description = formData.get("description");
+    const category = JSON.parse(formData.get("category"));
     const basePrice = parseFloat(formData.get("basePrice"));
     const image = formData.get("image");
     const sizes = JSON.parse(formData.get("sizes"));
     const extraIngredientPrices = JSON.parse(formData.get("extraIngredientPrices"));
 
-    const updateData = { name, description, basePrice, sizes, extraIngredientPrices };
+    const updateData = { name, description, category , basePrice, sizes, extraIngredientPrices };
 
     // Handle image conversion to buffer
     if (image && image.stream) {
