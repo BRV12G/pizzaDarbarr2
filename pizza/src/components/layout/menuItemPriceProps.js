@@ -1,15 +1,19 @@
 import Trash from "@/components/icons/Trash";
 import Pluss from "@/components/icons/Pluss";
+import CheveronDown from "../icons/CheveronDown";
+import { useState } from "react";
+import CheveronUp from "../icons/CheveronUp";
 
 export default function MenuItemPriceProps({name,addLabel, props, setProps}) {
 
     // const [sizes, setSizes] = useState([]);
+    const [isOpen , setIsOpen] = useState(false);
 
 
     function addProp() {
         // add a new size to the sizes array
         setProps(oldProps => {
-          return [...oldProps, { name: "", price: 0 }]
+          return [...(oldProps || []), { name: "", price: 0 }]
         });
 
     }
@@ -30,11 +34,19 @@ export default function MenuItemPriceProps({name,addLabel, props, setProps}) {
 
 
 
-
     return (
         <div className="bg-gray-200 p-2 rounded-md mb-2">
-                  <label>{name}</label>
-                  {props?.length > 0 && props.map((size, index) => (
+                  <button 
+                   onClick={() => setIsOpen(prev => !prev)}
+                   type="button"
+                   className="inline-flex p-1">
+                       {isOpen && ( <CheveronUp /> )} 
+                       {!isOpen && ( <CheveronDown /> )}
+                       <span>{name}</span>
+                       <span>({props?.length || 0})</span>
+                  </button>
+                  <div className={isOpen ? 'block' : 'hidden'}>
+                    {props?.length > 0 && props.map((size, index) => (
                     <div className="flex gap-2 items-end">
                       <div>
                            <label>Name</label>
@@ -48,9 +60,11 @@ export default function MenuItemPriceProps({name,addLabel, props, setProps}) {
                           <button type="button" className="bg-white mb-2 p-2" onClick ={() => removeProp(index)} > <Trash /> </button>
                       </div>
                     </div>
-                    
-                  ))}
-                  <button type="button"  onClick={addProp} className="bg-white"> <Pluss /> {addLabel}</button>
+                     ))}
+                   <button type="button"  onClick={addProp} className="bg-white"> <Pluss /> {addLabel}</button>
+
+                 </div>
+                  
                 </div>
 
     );
