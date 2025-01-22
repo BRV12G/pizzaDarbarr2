@@ -136,7 +136,25 @@ export default function EditMenuItemPage() {
         return 'You are not an admin!';
       }
 
+    async function handleDeleteClick() {
+      const promise = new Promise(async (resolve, reject) => {
+        const response = await fetch('/api/menu-items?_id='+id, {
+          method: 'DELETE',
+        });
+        if(response.ok)
+          resolve();
+        else
+          reject();
+      });
 
+      await toast.promise(promise, {
+        loading: "Deleting Menu Item..",
+        success: 'Deleted Menu Item!',
+        error: 'Error!'
+      });
+
+      setRedirectToItems(true);
+    } 
       
     return (
     <section className="mt-8">
@@ -173,6 +191,13 @@ export default function EditMenuItemPage() {
             </div>
         </div>
       </form>
+      <div className="max-w-md mx-auto mt-4">
+        <div className="max-w-xs ml-auto pl-4">
+          <button onClick={handleDeleteClick}>
+            Delete Menu Item
+          </button>
+        </div>
+      </div>
     </section>
  );
 }
