@@ -1,7 +1,7 @@
 "use client";
 
 import AdminTabs from "@/components/layout/AdminTabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useProfile } from "@/components/useProfile";
 import Link from "next/link";
@@ -22,6 +22,8 @@ export default function NewMenuItemPage() {
     const [imagePreview, setImagePreview] = useState(null); // Stores the preview URL 
     const [sizes, setSizes] = useState([]);
     const [extraIngredientPrices, setExtraIngredientPrices] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState('');
 
 
      
@@ -47,6 +49,7 @@ export default function NewMenuItemPage() {
         formData.append("image", image);
         formData.append("name", name);
         formData.append("description", description);
+        formData.append("category", JSON.stringify(category));
         formData.append("basePrice", basePrice);
         // formData.append("sizes" , sizes);
         // formData.append('extraIngredientPrices', extraIngredientPrices);
@@ -86,6 +89,14 @@ export default function NewMenuItemPage() {
 
       }
 
+      useEffect(() => {
+        fetch('/api/categories').then(res => {
+          res.json().then(categories => {
+            setCategories(categories);
+          });
+        });
+      }, []);
+
         if (redirectToItems) {
           return redirect ('/menu-items');
         }
@@ -101,6 +112,8 @@ export default function NewMenuItemPage() {
       if(!data.admin){
         return 'You are not an admin!';
       }
+
+     
 
     
     return (
@@ -127,6 +140,12 @@ export default function NewMenuItemPage() {
                 <input type="text" placeholder="Menu Item Name" value={name} onChange={(ev) => setName(ev.target.value)} />
                 <label>Description</label>
                 <input type="text" placeholder="Menu Item Description"value={description} onChange={(ev) => setDescription(ev.target.value)} />
+                <label>Category</label>
+                <select value={category} onChange={ev => setCategory(ev.target.value)}>
+                  {categories?.length > 0 && categories.map(c => (
+                    <option value={c._id}>{c.name}</option>
+                  ))}
+                </select>
                 <label>Base Price</label>
                 <input type="number" placeholder="Base Price" value={basePrice} onChange={(ev) => setBasePrice(ev.target.value)} />
                                 <MenuItemPriceProps name ={'Sizes'} addLabel={'Add Item Size'} props={sizes} setProps={setSizes} />
