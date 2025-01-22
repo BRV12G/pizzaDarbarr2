@@ -101,10 +101,11 @@ export default function CategoriesPage() {
                         </label>
                         <input type="text" placeholder="Category Name" value={categoryName} onChange={ev => setCategoryName(ev.target.value)}/>
                     </div>
-                    <div className="pb-2">
+                    <div className="pb-2 flex gap-2">
                         <button className="" type="submit">
                             {editedCategory ? 'Update' : 'Create'}
                         </button>
+                        <button type="button" onClick={() => {setEditedCategory(null); setCategoryName('')}}>Cancel</button>
                     </div>
                  </div>
                
