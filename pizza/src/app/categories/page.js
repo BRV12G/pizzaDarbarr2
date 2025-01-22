@@ -1,4 +1,5 @@
 "use client";
+import DeleteButton from "@/components/DeleteButton";
 import AdminTabs from "@/components/layout/AdminTabs";
 import { useProfile } from "@/components/useProfile";
 import { set } from "mongoose";
@@ -123,7 +124,8 @@ export default function CategoriesPage() {
                             setCategoryName(c.name);
                             }}>Edit
                         </button>
-                        <button onClick={() => handleDeleteClick(c._id)} type="button">Delete</button>
+                        {/* <button onClick={() => handleDeleteClick(c._id)} type="button">Delete</button> */}
+                        <DeleteButton label="Delete" onDelete={() => handleDeleteClick(c._id)} />
                     </div>
                 </div>
                ))}
