@@ -23,3 +23,13 @@ export async function GET(req){
     await Category.find().lean()
   );
 }
+
+
+export async function DELETE(req) {
+  mongoose.connect(process.env.MONGO_URL);
+  const url = new URL(req.url);
+  const _id = url.searchParams.get('_id');
+  await Category.deleteOne({_id});
+  console.log(_id);
+  return Response.json(true);
+}
