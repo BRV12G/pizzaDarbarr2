@@ -85,7 +85,7 @@ export default function Profilepage() {
     return (
         <section className="mt-8">
             <AdminTabs isAdmin={isAdmin} />
-            <div className='max-w-md mx-auto mt-8'>
+            <div className='max-w-2xl mx-auto mt-8'>
             {saved && (
                 <h2 className='text-center bg-green-100 rounded-lg border border-green-300 p-4'>
                     Profile Saved!

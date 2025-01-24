@@ -119,10 +119,10 @@ export default function NewMenuItemPage() {
     return (
     <section className="mt-8">
       <AdminTabs isAdmin={true} />
-      <div className="max-w-md mx-auto mt-8">
+      <div className="max-w-2xl mx-auto mt-8">
         <Link href={'/menu-items'} className="button"> <Left /> <span>Show All Menu Items </span></Link>
       </div>
-      <form onSubmit={handleFormSubmit} className="mt-8 max-w-md mx-auto">
+      <form onSubmit={handleFormSubmit} className="mt-8 max-w-2xl mx-auto">
         <div className="flex gap-4 items-start ">
            <div className="flex flex-col gap-4">
                 <input id="fileInput" type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
