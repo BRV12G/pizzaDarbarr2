@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import Image from "next/image";
-import { useProfile } from "../useProfile";
+import { useProfile } from "@/components/useProfile";
 
 export default function UserForm({user, onSave}) {
         const [userName , setUsername] = useState( user?.name ||' ');
@@ -11,6 +11,8 @@ export default function UserForm({user, onSave}) {
         const [postalCode , setPostalCode] = useState(user?.postalCode ||' ');
         const [city , setCity] = useState(user?.city ||' ');
         const [country , setCountry] = useState(user?.country ||' ');
+        const [admin, setAdmin] = useState(user?.admin || false);
+        const {data:loggedInUserData} = useProfile();
 
         async function handleFileChange(ev){
                 const files = ev.targetfiles;
@@ -38,7 +40,7 @@ export default function UserForm({user, onSave}) {
                                 </label>
                         </div>
                     </div>
-                    <form className='grow' onSubmit={ev =>onSave(ev, {name:userName, image, phone, streetAddress, city, country, postalCode})}>
+                    <form className='grow' onSubmit={ev =>onSave(ev, {name:userName, image, phone,admin, streetAddress, city, country, postalCode,})}>
                         <label>First and Last Name</label>
                         <input type="text" placeholder="First and Last Name" value={userName} onChange={ev => setUsername(ev.target.value)}/>
                         <label>Email</label>
@@ -47,7 +49,7 @@ export default function UserForm({user, onSave}) {
                         <input type="tel" placeholder="Phone Number" value={phone} onChange={ev => setPhone(ev.target.value)} />
                         <label>Street Address</label>
                         <input type="text" placeholder="Street Address" value={streetAddress} onChange={ev => setStreetAddress(ev.target.value)} />
-                        <div className='flex gap-2'>
+                        <div className='grid grid-cols-2 gap-2'>
                            <div>
                               <label>Postal Code</label>
                               <input  type="text" placeholder="Postal Code" value={postalCode} onChange={ev => setPostalCode(ev.target.value)} />
@@ -59,6 +61,16 @@ export default function UserForm({user, onSave}) {
                         </div>
                         <label>Country</label>
                         <input type="text" placeholder="Country" value={country} onChange={ev => setCountry(ev.target.value)} />
+                        {loggedInUserData.admin && (
+                            <div className="">
+                               <label className="p-2  inline-flex gap-1  items-center mb-2" htmlFor="adminCb">
+                                  <input 
+                                    id="adminCb" type="checkbox" className="mr-2" value={'1'} checked={admin} onClick={ev => setAdmin(ev.target.checked)}></input>
+                                    <span>Admin</span>
+                               </label>
+                            </div>
+                        )}
+                        
                         <button type='submit'>Save</button>
                     </form>
 
