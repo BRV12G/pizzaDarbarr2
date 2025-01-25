@@ -39,7 +39,7 @@ export default function EditUserPage() {
 
     await toast.promise(promise, {
       loading: 'Saving user...',
-      success: 'User saved',
+      success: 'User Updated!',
       error: 'An error has occurred while saving the user',
     });
   }
