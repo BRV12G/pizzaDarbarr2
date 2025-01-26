@@ -30,6 +30,22 @@ export default function CartPage() {
         setAddress(prevAddress => ({...prevAddress, [propName]: value}));
         
     }
+    
+    async function proceedToCheckout(ev) {
+        //redirect to stripe checkout
+       const response = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                address,
+                cartProducts,
+            })
+        });
+        const link = await response.json();
+        console.log(link);
+        window.location = link;
+    }
+
     return (
         <section className="mt-8">
         <div className="text-center mb-4">
@@ -101,7 +117,7 @@ export default function CartPage() {
               </div>
               <div className="bg-gray-200 p-4 rounded-lg">
                 <h2>Checkout</h2>
-                <form>
+                <form onSubmit={proceedToCheckout}>
                     <AddressInputs addressProps={address} setAddressProps={handleAddressChange}/>
                     <button type="submit">Pay Rs.{cartProducts?.reduce((acc, product) => acc + cartProductPrice(product), 0)+50} </button>
                 </form>
