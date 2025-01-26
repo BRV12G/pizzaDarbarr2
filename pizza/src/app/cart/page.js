@@ -84,16 +84,26 @@ export default function CartPage() {
                         </div>
                     </div>
                  ))}
-                 <div className="py-4 text-right pr-16">
-                    <span className="text-gray-500">SubTotal: </span>
-                    <span className="font-semibold text-lg pl-2">Rs.{cartProducts?.reduce((acc, product) => acc + cartProductPrice(product), 0)} </span>
+                 <div className="py-4  pr-16 flex justify-end items-center">
+                    <div className="text-gray-500">
+                        SubTotal: <br />
+                        Delivery: <br />
+                        Total:
+                    </div>
+                    <div className="font-semibold text-lg pl-2 flex items-center">
+                        Rs.{cartProducts?.reduce((acc, product) => acc + cartProductPrice(product), 0)}
+                        <br />
+                        Rs.50
+                        <br />
+                        Rs.{cartProducts?.reduce((acc, product) => acc + cartProductPrice(product), 0)+50}
+                    </div>
                  </div>
               </div>
               <div className="bg-gray-200 p-4 rounded-lg">
                 <h2>Checkout</h2>
                 <form>
                     <AddressInputs addressProps={address} setAddressProps={handleAddressChange}/>
-                    <button type="submit">Pay Rs.{cartProducts?.reduce((acc, product) => acc + cartProductPrice(product), 0)} </button>
+                    <button type="submit">Pay Rs.{cartProducts?.reduce((acc, product) => acc + cartProductPrice(product), 0)+50} </button>
                 </form>
               </div>
           </div>
