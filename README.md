@@ -10,3 +10,4 @@
 ##### pop-ups  [react hot toast](https://react-hot-toast.com/docs)
 ##### flying items [React-flying-items](https://npm.io/package/react-flying-item)
 ##### payment gateway [stripe](https://dashboard.stripe.com/test/dashboard)
+##### [stripe docs](https://docs.stripe.com/api/checkout/sessions/create)
