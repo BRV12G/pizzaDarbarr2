@@ -2,7 +2,7 @@ import Image from "next/image";
 import Trash  from "@/components/icons/Trash";
 import { cartProductPrice } from "@/components/AppContext";
 
-export default function CartProduct(product, onRemove) {
+export default function CartProduct({product, onRemove}) {
     return (
         <div key={product._id} className="flex gap-4 mb-2 items-center border-b py-2">
                         {/* <div>
