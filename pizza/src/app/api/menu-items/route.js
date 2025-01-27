@@ -134,6 +134,7 @@
 import { MenuItem } from "@/models/MenuItem";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
+import { isAdmin } from "../auth/[...nextauth]/route";
 
 // Helper function to convert a readable stream to a buffer
 const streamToBuffer = async (stream) => {
@@ -224,8 +225,8 @@ export const PUT = async (req) => {
 };
 
 export async function GET() {
-  await mongoose.connect(process.env.MONGO_URL);
-  return Response.json(await MenuItem.find().lean());
+   mongoose.connect(process.env.MONGO_URL);
+    return Response.json(await MenuItem.find().lean());
 }
 
 
@@ -233,8 +234,9 @@ export async function DELETE(req) {
   mongoose.connect(process.env.MONGO_URL);
   const url = new URL(req.url);
   const _id = url.searchParams.get('_id');
-  await MenuItem.deleteOne({_id});
-  console.log(_id);
+  if (await isAdmin()){
+    await MenuItem.deleteOne({_id});
+  }
   return Response.json(true);
 }
 
