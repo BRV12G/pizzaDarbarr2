@@ -33,7 +33,7 @@ export default function CartProduct({product, onRemove}) {
                             {product.extras?.length > 0 && (
                                 <div className="text-sm text-gray-500">
                                     {product.extras.map(extra => (
-                                        <div key={extra._id}>
+                                        <div key={extra.name}>
                                             <span>{extra.name} Rs{extra.price}</span>
                                         </div>
                                     ))}
