@@ -43,9 +43,12 @@ export default function CartProduct(product, onRemove) {
                         <div className=" text-lg font-semibold">
                            Rs.{cartProductPrice(product)}
                         </div>
-                        <div className="ml-4">
-                            <button type="button" onClick={() => onRemove(index)} className="p-2"> <Trash /> </button>
-                        </div>
+                        {!!onRemove && (
+                          <div className="ml-4">
+                              <button type="button" onClick={() => onRemove(index)} className="p-2"> <Trash /> </button>
+                          </div>  
+                        )}
+                        
                     </div>
     );
 }
