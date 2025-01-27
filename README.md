@@ -12,3 +12,6 @@
 ##### payment gateway [stripe](https://dashboard.stripe.com/test/dashboard) - bhairavigawas9@gmail.com
 ##### [stripe docs](https://docs.stripe.com/api/checkout/sessions/create)
 ##### [api keys stripe](https://dashboard.stripe.com/test/apikeys)
+
+
+###### if you want google pay option on stripe than you need to shift from http to https.
