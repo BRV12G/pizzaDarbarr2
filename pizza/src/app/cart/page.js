@@ -18,6 +18,14 @@ export default function CartPage() {
     console.log(profileData);
 
     useEffect(() => {
+        if (typeof window !== 'undefined') {
+          if (window.location.href.includes('canceled=1')) {
+            toast.error('Payment failed 😔');
+          }
+        }
+      }, []);
+
+    useEffect(() => {
         if(profileData?.city) {
             const {phone, streetAddress, city, postalCode, country} = profileData;
             const addressFromProfile = {phone, streetAddress, city, postalCode, country};
