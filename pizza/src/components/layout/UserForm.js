@@ -39,7 +39,7 @@ export default function UserForm({user, onSave}) {
     return (
 
         
-        <div className='flex gap-4'>
+        <div className='md:flex gap-4'>
                     <div>                    
                        <div className='p-2 rounded-lg relative'>
                               <Image className ="rounded-full w-full h-full mb-2" src={image} width={250} height={250} alt="avatar" />
