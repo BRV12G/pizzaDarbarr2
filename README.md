@@ -12,7 +12,7 @@
 ##### payment gateway [stripe](https://dashboard.stripe.com/test/dashboard) - bhairavigawas9@gmail.com
 ##### [stripe docs](https://docs.stripe.com/api/checkout/sessions/create)
 ##### [api keys stripe](https://dashboard.stripe.com/test/apikeys)
-##### stripe CLI - [webhooks for redirection after payment](https://dashboard.stripe.com/test/workbench/webhooks) REFERENCE SETUP - [STRIPE CLI SETUP](https://www.youtube.com/watch?v=LUHeCvVFATU) note: add path to enviroment , restart vscode, run in terminal "stripe login" and authenticate, 
+##### stripe CLI - [webhooks for redirection after payment](https://dashboard.stripe.com/test/workbench/webhooks) REFERENCE SETUP - [STRIPE CLI SETUP](https://www.youtube.com/watch?v=LUHeCvVFATU) note: add path to enviroment , restart vscode, run in terminal "stripe login" and authenticate, change your port of localhost accordingly.
 ![image](https://github.com/user-attachments/assets/7d9d9aeb-96d4-4b98-9843-cb82c90511d8)
 
 
