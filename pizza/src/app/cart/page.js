@@ -7,7 +7,6 @@ import Trash from "@/components/icons/Trash";
 import AddressInputs from "@/components/layout/AddressInputs";
 import { useState } from "react";
 import { useProfile } from "@/components/useProfile";
-import Link from "next/link";
 import toast from "react-hot-toast";
 // import {createContext} from "react";
 
@@ -33,18 +32,38 @@ export default function CartPage() {
     
     async function proceedToCheckout(ev) {
         //redirect to stripe checkout
-       const response = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                address,
-                cartProducts,
-            })
+        ev.preventDefault();
+        const promise = new Promise ((resolve, reject) => {
+            fetch('/api/checkout', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    address,
+                    cartProducts,
+                })
+            }).then(async (response) => {
+                if(response.ok) {
+                    resolve();
+                    const link = await response.json();
+                    console.log(link);
+                     window.location = link;
+                } else {
+                    reject();
+                }
+                
+            });
         });
-        const link = await response.json();
-        console.log(link);
-        window.location = link;
+
+       await toast.promise(promise, {
+            loading: 'Preparing Checkout...',
+            success: 'Redirect complete!',
+            error: 'Redirect error!',
+        })
+        
+        
     }
+
+    // console.log({cartProducts});
 
     return (
         <section className="mt-8">
@@ -106,7 +125,7 @@ export default function CartPage() {
                         Delivery: <br />
                         Total:
                     </div>
-                    <div className="font-semibold text-lg pl-2 flex items-center">
+                    <div className="font-semibold  pl-2 flex items-center">
                         Rs.{cartProducts?.reduce((acc, product) => acc + cartProductPrice(product), 0)}
                         <br />
                         Rs.50
