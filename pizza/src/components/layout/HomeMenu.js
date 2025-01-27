@@ -36,7 +36,7 @@ export default function HomeMenu () {
                 <div className="text-center mb-4">
                     <SectionHeaders subHeader={'Check Out'} mainHeader={'Our Best Sellers'} /> 
                 </div>
-                <div className='grid grid-cols-3 gap-4'>
+                <div className='grid sm:grid-cols-3 gap-4'>
                     {bestSellers?.length > 0 && bestSellers.map(item => (
                         <MenuItems {...item} />
     ))}
