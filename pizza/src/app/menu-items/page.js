@@ -80,7 +80,7 @@
 
 "use client";
 
-import { useProfile } from "@/components/useProfile";
+import { useProfile } from "@/components/UseProfile";
 import AdminTabs from "@/components/layout/AdminTabs";
 import Link from "next/link";
 import Right from "@/components/icons/right";

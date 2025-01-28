@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import Image from "next/image";
-import { useProfile } from "@/components/useProfile";
+import { useProfile } from "@/components/UseProfile";
 import AddressInputs from "./AddressInputs";
 
 export default function UserForm({user, onSave}) {

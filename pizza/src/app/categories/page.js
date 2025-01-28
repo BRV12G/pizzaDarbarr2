@@ -1,7 +1,7 @@
 "use client";
 import DeleteButton from "@/components/DeleteButton";
 import AdminTabs from "@/components/layout/AdminTabs";
-import { useProfile } from "@/components/useProfile";
+import { useProfile } from "@/components/UseProfile";
 import { set } from "mongoose";
 import { useEffect } from "react";
 import { useState } from "react";

@@ -6,7 +6,7 @@ import Image from "next/image";
 import Trash from "@/components/icons/Trash";
 import AddressInputs from "@/components/layout/AddressInputs";
 import { useState } from "react";
-import { useProfile } from "@/components/useProfile";
+import { UseProfile } from "@/components/UseProfile";
 import toast from "react-hot-toast";
 import CartProduct from "@/components/menu/CartProduct";
 // import {createContext} from "react";

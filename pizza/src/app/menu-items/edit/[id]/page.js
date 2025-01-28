@@ -3,7 +3,7 @@
 import AdminTabs from "@/components/layout/AdminTabs";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useProfile } from "@/components/useProfile";
+import { useProfile } from "@/components/UseProfile";
 import Link from "next/link";
 import Left from "@/components/icons/left";
 import { redirect } from 'next/navigation';
