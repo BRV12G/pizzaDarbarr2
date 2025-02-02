@@ -50,7 +50,7 @@ export default function MenuItemPriceProps({name,addLabel, props, setProps}) {
                     <div key={index} className="flex gap-2 items-end">
                       <div>
                            <label>Name</label>
-                           <input type="text" placeholder="Size Name" value ={size.name} onChange={ev => editProp(ev, index, 'name')}/>
+                           <input type="text" placeholder="Name" value ={size.name} onChange={ev => editProp(ev, index, 'name')}/>
                       </div>
                       <div>
                           <label>Extra Price</label>
