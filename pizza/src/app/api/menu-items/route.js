@@ -153,7 +153,7 @@ export const POST = async (req) => {
     const image = formData.get("image");
     const name = formData.get("name");
     const description = formData.get("description");
-    const category = JSON.parse(formData.get("category"));
+    const category = JSON.parse(formData.get("category_id"));
     const basePrice = parseFloat(formData.get("basePrice"));
     const sizes = JSON.parse(formData.get("sizes"));
     const extraIngredientPrices = JSON.parse(formData.get("extraIngredientPrices"));
