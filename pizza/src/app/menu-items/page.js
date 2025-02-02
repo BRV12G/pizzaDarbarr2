@@ -120,11 +120,11 @@ export default function MenuItemsPage() {
             <h2 className="text-sm text-gray-500 mt-8">Edit Menu Items</h2>
             <div className="grid grid-cols-3 gap-2">
             {menuItems?.length > 0 && menuItems.map(item => (
-                <Link key={item._id} href={'/menu-items/edit/'+item._id} className = "bg-gray-200 rounded-lg p-4">
-                    <div className="relative">
-                        <Image src={`data:image/png;base64,${item.image}`} alt={''} c width={200} height={200} className="rounded-lg"/>
+                <Link key={item._id} href={'/menu-items/edit/'+item._id} className = "bg-white border border-gray-300 rounded-lg p-4 shadow-lg">
+                    <div className="w-48 h-48 overflow-hidden">
+                        <Image src={`data:image/png;base64,${item.image}`} alt={''} c width={200} height={200} className="rounded-lg object-cover w-full h-full"/>
                     </div>
-                    <div className="text-center">{item.name}</div>
+                    <div className="text-center mt-4">{item.name}</div>
                 </Link>
             ))}
 
