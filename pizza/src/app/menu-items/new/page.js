@@ -142,6 +142,7 @@ export default function NewMenuItemPage() {
                 <input type="text" placeholder="Menu Item Description"value={description} onChange={(ev) => setDescription(ev.target.value)} />
                 <label>Category</label>
                 <select value={category} onChange={ev => setCategory(ev.target.value)}>
+                  <option value="" disabled selected>Select a Category</option>
                   {categories?.length > 0 && categories.map(c => (
                     <option value={c._id}>{c.name}</option>
                   ))}
