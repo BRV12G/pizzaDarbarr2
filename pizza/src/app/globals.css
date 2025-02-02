@@ -60,3 +60,10 @@ div.tabs > *.active{
 .flying-button-parent button{
     @apply  border-primary bg-primary text-white rounded-full;
 }
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
