@@ -210,8 +210,8 @@ export default function EditMenuItemPage() {
             </div>
         </div>
       </form>
-      <div className="max-w-md mx-auto mt-4">
-        <div className="max-w-xs ml-auto pl-4">
+      <div className="max-w-2xl mx-auto mt-4">
+        <div className="max-w-2xl mx-auto ">
           <DeleteButton label="Delete this Menu Item" onDelete={handleDeleteClick} />
         </div>
       </div>
