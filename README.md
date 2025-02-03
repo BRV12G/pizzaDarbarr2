@@ -5,7 +5,7 @@
 ##### Mongodb atlas   [database cloud - whatsappbhakti@gmail.com](https://cloud.mongodb.com/) 
 ##### password hashing [bcrypt](https://www.npmjs.com/package/bcrypt)
 ##### icons [hero-icons](https://heroicons.com/)
-##### google authentication [google cloud console](https://console.cloud.google.com/welcome/new?pli=1)
+##### google authentication [google cloud console](https://console.cloud.google.com/welcome/new?pli=1) - bhairavigawas9@gmail.com
 ##### mongodb sessions [mongo adapters for sessions](https://authjs.dev/getting-started/adapters/mongodb)
 ##### pop-ups  [react hot toast](https://react-hot-toast.com/docs)
 ##### flying items [React-flying-items](https://npm.io/package/react-flying-item)
