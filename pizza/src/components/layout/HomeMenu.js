@@ -18,18 +18,18 @@ export default function HomeMenu () {
     return (
     
             <section className="">
-                <div className="absolute  left-0 right-0 w-full justify-start">
-                    <div className="absolute left-0 -top-[70px] text-left -z-10">
+                <div className="absolute left-0 right-0 w-full justify-start">
+                    <div className="absolute left-0 -top-[90px] text-left -z-10">
                         <Image src={'/sallad1.png'}
-                        width={109}
-                        height={189}
+                        width={207}
+                        height={289}
                         alt={'sallad'} />
 
                     </div>
-                    <div className="absolute -top-[100px] right-0 -z-10">
+                    <div className="absolute -top-[300px] right-0 -z-10">
                         <Image src={'/sallad2.png'}
-                        width={107}
-                        height={195}
+                        width={207}
+                        height={295}
                         alt={'sallad'} />
                     </div>
                 </div>
